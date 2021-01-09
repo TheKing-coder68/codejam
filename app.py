@@ -1,6 +1,7 @@
 from flask import Flask, url_for, render_template, redirect
 from flask.globals import request
 from flask_sqlalchemy import SQLAlchemy
+from datetime import date
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '5791628bb0b13ce0c676dfde280ba245'
@@ -8,45 +9,6 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///site.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
-schedule = [
-    {
-        'period':1,
-        'time':'8:05-59'
-    },
-    {
-        'period':2,
-        'time':'8:05-59'
-    },
-    {
-        'period':3,
-        'time':'8:05-59'
-    },
-    {
-        'period':4,
-        'time':'8:05-59'
-    },{
-        'period':5,
-        'time':'8:05-59'
-    },
-    {
-        'period':6,
-        'time':'8:05-59'
-    },{
-        'period':7,
-        'time':'8:05-59'
-    },
-    {
-        'period':8,
-        'time':'8:05-59'
-    },{
-        'period':9,
-        'time':'8:05-59'
-    },
-    {
-        'period':10,
-        'time':'8:05-59'
-    },
-]
 class TodoItem(db.Model):
     def __init__(self, title, content):
         self.title = title
@@ -58,7 +20,7 @@ class TodoItem(db.Model):
         return f"Todo Item('{self.title}', '{self.content}')"
 @app.route("/")
 def home():
-    return render_template('index.html', title='Home', header='Schedule', data=schedule)
+    return render_template('index.html', title='Home', header='Dashboard', date=date.today())
 @app.route('/todo', methods=['GET', 'POST'])
 def todo():
     if request.method == 'GET':

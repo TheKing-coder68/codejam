@@ -16,6 +16,10 @@
     <div class="w3-container w3-theme w3-padding-12">
         <h1 style="text-align: center;">{{header}}</h1>
     </div>
+    <div class="w3-bar w3-theme-dark">
+        <h4><a class="w3-bar-item" href="{{ url_for('home') }}">Home</a></h4>
+        <h4><a class="w3-bar-item" href="{{ url_for('todo') }}">Todo</a></h4>
+    </div>
     <div class="w3-container">
         {% block content %}
             

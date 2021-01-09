@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 {% block content %}
-    <h1 class="header w3-text-theme w3-padding">Your tasks for today</h1>
+    <div class="w3-margin"></div>
     {% for item in content %}
         <div class="w3-card card w3-padding" id="{{item.id}}"> 
             <h3 class="w3-text-theme">{{item.title}}</h3>
@@ -29,7 +29,7 @@
                 <form autocomplete="off" action="{{url_for('todo')}}" method="POST" class="w3-container w3-text-theme">
                     <div class="w3-section">
                         <label><b>Title</b></label>
-                        <input type="text" class="w3-border w3-input w3-margin-bottom" name="title" required>
+                        <input type="text" class="w3-border w3-input w3-margin-bottom" name="title" required autofocus>
                         <label><b>Description</b></label>
                         <input type="text" class="w3-border w3-input w3-margin-bottom" id="description" name="description"
                             required>
