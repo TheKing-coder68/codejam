@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="{{url_for('static', filename='w3.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+   {% if title %}
+       <title>{{title}}</title>
+   {% else %}
+        <title>Portal</title>
+   {% endif %}
+</head>
+<body>
+    <div class="w3-container w3-theme w3-padding-12">
+        <h1 style="text-align: center;">{{header}}</h1>
+    </div>
+    <div class="w3-container">
+        {% block content %}
+            
+        {% endblock content %}
+    </div>
+</body>
+</html>

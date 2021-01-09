@@ -1,0 +1,42 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <h1 class="header w3-text-theme w3-padding">Your tasks for today</h1>
+    {% for item in content %}
+        <div class="w3-card card w3-padding" id="{{item.id}}"> 
+            <h3 class="w3-text-theme">{{item.title}}</h3>
+            <div class="w3-display-container">
+                <p class="w3-text-theme garb">{{item.content}}</p>
+                <div class="trash-cont garb w3-padding w3-display-right">
+                    <a href="{{url_for('del_id', id=item.id)}}">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                            fill="#009688" width="24px" height="24px" class="trash">
+                            <path d="M0 0h24v24H0z" fill="none" />
+                            <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    <button class="w3-button w3-xlarge w3-theme-d1 w3-display-bottomright w3-margin"
+        onclick="document.getElementById('id01').style.display='block'">+</button>
+    <div id="id01" class="w3-modal">
+        <div class="w3-modal-content w3-animate-zoom">
+            <div class="w3-container">
+                <span onclick="document.getElementById('id01').style.display='none'"
+                    class="w3-button w3-display-topright">&times;</span>
+                <h1 class="w3-text-theme" style="text-align: center;">New Item</h1>
+                <form autocomplete="off" action="{{url_for('todo')}}" method="POST" class="w3-container w3-text-theme">
+                    <div class="w3-section">
+                        <label><b>Title</b></label>
+                        <input type="text" class="w3-border w3-input w3-margin-bottom" name="title" required>
+                        <label><b>Description</b></label>
+                        <input type="text" class="w3-border w3-input w3-margin-bottom" id="description" name="description"
+                            required>
+                        <button class="w3-button w3-block w3-theme w3-section w3-padding" type="submit">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

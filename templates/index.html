@@ -1,0 +1,34 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <main class="w3-threeqaurter w3-section w3-margin">
+        <h1 class="w3-text-theme">Your schedule for today is</h1>
+        <div class="schedule w3-container w3-theme-dark w3-half">
+            <h1 style="text-align: center">Schedule</h1>
+            <h3 style="text-align: center">Monday-Thursday</h3>
+            <div class="w3-content">
+                <table class="w3-table-all w3-section">
+                    {% for times in data %}
+                        <tr class="w3-theme">
+                            <td>Period {{times.period}}</td>
+                            <td>{{times.time}}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+    </main>
+    <nav class="w3-right w3-container w3-quarter w3-theme-dark">
+        <h1>Navbar</h1>
+        <table class="w3-table-all w3-section">
+            <tr class="w3-theme">
+                <td><a href="{{url_for('todo')}}">Todo List</a></td>
+            </tr>
+                <tr class="w3-theme">
+                    <td>Other Stuff</td>
+                </tr>
+                <tr class="w3-theme">
+                    <td>More Stuff</td>
+                </tr>
+        </table>
+    </nav>
+{% endblock content %}
