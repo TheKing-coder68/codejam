@@ -1,5 +1,10 @@
 {% extends 'layout.html' %}
 {% block content %}
     <h1 class="w3-text-theme" style="text-align: center;">Today is: {{date.strftime('%A %b')}} {{date.strftime('%d %Y')}}</h1>
-    
+    <div class="w3-padding w3-card-4 w3-round w3-theme" style="width: fit-content;">
+        <h2 class="w3-round w3-padding">What you need to get done</h2>
+        {% for i in due %}
+            <h4 class="w3-padding">{{i}}</h4>
+        {% endfor %}
+    </div>
 {% endblock content %}
