@@ -1,3 +1,4 @@
+from operator import le
 from flask import Flask, url_for, render_template, redirect
 from flask.globals import request
 from flask_sqlalchemy import SQLAlchemy
@@ -10,27 +11,35 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 class TodoItem(db.Model):
-    def __init__(self, title, content):
+    def __init__(self, title, content, duedate):
         self.title = title
+        self.duedate = duedate
         self.content = content
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(100), nullable=False)
     content = db.Column(db.String(100), nullable=False)
+    duedate = db.Column(db.String(100), nullable=False)
     def __repr__(self):
-        return f"Todo Item('{self.title}', '{self.content}')"
+        return f"{self.title} is due on {self.duedate}"
 @app.route("/")
 def home():
-    return render_template('index.html', title='Home', header='Dashboard', date=date.today())
+    data = TodoItem.query.all()
+    return render_template('index.html', title='Home', header='Dashboard', date=date.today(), due=data)
 @app.route('/todo', methods=['GET', 'POST'])
 def todo():
     if request.method == 'GET':
         list1 = TodoItem.query.all()
         list1 = list1[::-1]
-        return render_template('todo.html', content=list1, title="Todo List", header='Todo List')
+        if len(list1) == 0:
+            content = [{'title':'Nothing to do! Click the plus to add tasks', 'content':'All your tasks are done', 'duedate':'Nothing is due'}]
+        else:
+            content = list1
+        return render_template('todo.html', content=content, title="Todo List", header='Todo List')
     else:
         title = request.form.get('title')
         description = request.form.get('description')
-        todo = TodoItem(title, description)
+        ddate = request.form.get('due_date')
+        todo = TodoItem(title, description, ddate)
         db.session.add(todo)
         db.session.commit()
         return redirect(url_for('todo', methods=['GET']))
