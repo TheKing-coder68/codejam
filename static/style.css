@@ -1,22 +1,22 @@
 .card {
-  width: 50%;
-  margin: auto;
+    width: 50%;
+    margin: auto;
 }
 .header {
-  text-align: center;
+    text-align: center;
 }
 .mySlides{
-  display: none;
+    display: none;
 }
 .trash:hover {
-  fill: #f44336;
+    fill: #f44336;
 }
 .trash-cont {
-  width: 0%;
-  margin: auto;
+    width: 0%;
+    margin: auto;
 }
 a {
-  text-decoration: none;
+    text-decoration: none;
 }
 .w3-theme-l5 {color:#000 !important; background-color:#e9fffd !important}
 .w3-theme-l4 {color:#000 !important; background-color:#b7fff8 !important}
