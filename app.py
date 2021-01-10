@@ -79,5 +79,5 @@ def del_event(id):
     db.session.commit()
     return redirect(url_for('dat'))
 if __name__ == "__main__":
-    db.create_all()
+    db.create_all() # creates all the tables in the db
     app.run(debug=True, port='8000')
