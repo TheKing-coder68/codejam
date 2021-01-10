@@ -1,9 +1,6 @@
 # codejam
 
-## Dashboard app for the codejam
+## Personal dashboard app for the codejam
 
-```bash
-python app.py
-```
-
-to run the app use the above comand
+to run the app, clone this repository and cd into its directory
+type ```python app.py``` into your terminal
