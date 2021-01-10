@@ -1,0 +1,53 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <h1 class="w3-text-theme">Your important dates are</h1>
+    <div class="schedule w3-container w3-theme-dark w3-half">
+        <h3 style="text-align: center">Dates and Times</h3>
+        <div class="w3-content">
+            <table class="w3-table-all w3-section">
+                    <tr class="w3-theme">
+                        <th>Event Type</th>
+                        <th>Date</th>
+                        <th>Notes</th>
+                    </tr>
+                    {% for event in dates %}
+                        <tr class="w3-theme">
+                            <td>{{event.event_type}}</td>
+                            <td>{{event.date}}</td>
+                            <td class="w3-display-container">{{event.notes}} 
+                                <a class="w3-display-right" href="{{url_for('del_event', id=event.id)}}">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                                    fill="#004a43" width="24px" height="24px" class="trash">
+                                    <path d="M0 0h24v24H0z" fill="none" />
+                                    <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z" />
+                                </svg>
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+            </table>
+        </div>
+    </div>
+    <button class="w3-button w3-xlarge w3-theme-d1 w3-display-bottomright w3-margin"
+    onclick="document.getElementById('id01').style.display='block'">+</button>
+    <div id="id01" class="w3-modal">
+        <div class="w3-modal-content w3-animate-zoom">
+            <div class="w3-container">
+                <span onclick="document.getElementById('id01').style.display='none'"
+                    class="w3-button w3-display-topright">&times;</span>
+                <h1 class="w3-text-theme" style="text-align: center;">New Item</h1>
+                <form autocomplete="off" action="{{url_for('dat')}}" method="POST" class="w3-container w3-text-theme">
+                    <div class="w3-section">
+                        <label><b>Event Type</b></label>
+                        <input type="text" class="w3-border w3-input w3-margin-bottom" name="type" placeholder="Birthday, Meeting..." required>
+                        <label><b>Date</b></label>
+                        <input type="text" class="w3-border w3-input w3-margin-bottom" id="date" name="date" placeholder="January 1st 2021" required>
+                        <label><b>Event Notes</b></label>
+                        <input type="text" class="w3-border w3-input w3-margin-bottom" id="notes" name="notes" placeholder="Meeting with John" required>
+                        <button class="w3-button w3-block w3-theme w3-section w3-padding" type="submit">Add Event</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

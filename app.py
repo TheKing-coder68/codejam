@@ -1,6 +1,4 @@
-from operator import le
-from flask import Flask, url_for, render_template, redirect
-from flask.globals import request
+from flask import Flask, url_for, render_template, redirect, request
 from flask_sqlalchemy import SQLAlchemy
 from datetime import date
 
@@ -21,6 +19,17 @@ class TodoItem(db.Model):
     duedate = db.Column(db.String(100), nullable=False)
     def __repr__(self):
         return f"{self.title} is due on {self.duedate}"
+class Event(db.Model):
+    def __init__(self, event_type, date, notes):
+        self.event_type = event_type
+        self.date = date
+        self.notes = notes
+    id = db.Column(db.Integer, primary_key=True)
+    event_type = db.Column(db.String(100), nullable=False)
+    date = db.Column(db.String(100), nullable=False)
+    notes = db.Column(db.String(100), nullable=False)
+    def __repr__(self):
+        return f"{self.event_type} {self.date} {self.notes}"
 @app.route("/")
 def home():
     data = TodoItem.query.all()
@@ -49,6 +58,26 @@ def del_id(id):
     db.session.delete(id)
     db.session.commit()
     return redirect(url_for('todo'))
+@app.route("/dates-and-times", methods=['GET', 'POST'])
+def dat():
+    if request.method == 'GET':
+        events = Event.query.all()
+        events = events[::-1]
+        return render_template('dat.html', header="Important Dates and Times", dates=events)
+    else:
+        e_type = request.form.get('type')
+        date = request.form.get('date')
+        notes = request.form.get('notes')
+        event = Event(e_type, date, notes)
+        db.session.add(event)
+        db.session.commit()
+        return redirect(url_for('dat', methods=['GET']))
+@app.route("/del/event/<id>")
+def del_event(id):
+    id = Event.query.get(id)
+    db.session.delete(id)
+    db.session.commit()
+    return redirect(url_for('dat'))
 if __name__ == "__main__":
     db.create_all()
     app.run(debug=True, port='8000')
