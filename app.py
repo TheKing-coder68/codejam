@@ -33,6 +33,7 @@ class Event(db.Model):
 @app.route("/")
 def home():
     data = TodoItem.query.all()
+    data = data[::-1]
     return render_template('index.html', title='Home', header='Dashboard', date=date.today(), due=data)
 @app.route('/todo', methods=['GET', 'POST'])
 def todo():
