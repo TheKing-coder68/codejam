@@ -1,9 +1,7 @@
 # codejam
 
-## Dashboard app for the codejam
+## Person dashboard app for the codejam
 
-```bash
-python app.py
-```
-
-to run the app use the above comand
+```python app.py```
+to run the app clone the repository and cd into its directory and type python app.py
+it uses no dependencies other than Flask, FlaskSQLAlchemy and datetime
