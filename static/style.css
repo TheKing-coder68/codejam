@@ -18,6 +18,21 @@
 a {
     text-decoration: none;
 }
+.link{
+    text-decoration: underline;
+}
+img{
+    border-radius: 50%;
+}
+.plus {
+    border-radius: 50%;
+}
+.err-img{
+    border-radius: 0%;
+}
+.und {
+    text-decoration: underline;
+}
 .w3-theme-l5 {color:#000 !important; background-color:#e9fffd !important}
 .w3-theme-l4 {color:#000 !important; background-color:#b7fff8 !important}
 .w3-theme-l3 {color:#000 !important; background-color:#6efff1 !important}
