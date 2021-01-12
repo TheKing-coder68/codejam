@@ -3,9 +3,8 @@
 <head id="changecss">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="shortcut icon" href="{{url_for('static', filename='favicon.ico')}}" type="image/x-icon">
     <link rel="stylesheet" href="{{url_for('static', filename='w3.css')}}">
-    <link rel="stylesheet" href="{{url_for('static', filename='all.css')}}">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
    {% if title %}
        <title>{{title}}</title>
@@ -14,13 +13,10 @@
    {% endif %}
 </head>
 <body>
-    <div class="w3-container w3-theme w3-padding-12">
-        <h1 style="text-align: center;">{{header}}</h1>
-    </div>
     <div class="w3-bar w3-theme-dark">
-        <h4><a class="w3-bar-item" href="{{ url_for('home') }}">Home</a></h4>
-        <h4><a class="w3-bar-item" href="{{ url_for('todo') }}">Todo</a></h4>
-        <h4><a class="w3-bar-item" href="{{ url_for('dat') }}">Important Dates</a></h4>
+        <h4><a class="w3-bar-item w3-margin-bottom" href="{{ url_for('home') }}">Home</a></h4>
+        <h4><a class="w3-bar-item w3-margin-bottom" href="{{ url_for('todo') }}">Todo</a></h4>
+        <h4><a class="w3-bar-item w3-margin-bottom" href="{{ url_for('dat') }}">Important Dates</a></h4>
     </div>
     <div class="w3-container">
         {% block content %}
