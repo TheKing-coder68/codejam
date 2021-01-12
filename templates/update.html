@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="w3-margin"></div>
+<form autocomplete="off" id="form" action="{{url_for('save_updated')}}" method="POST" class="update w3-card w3-container w3-text-theme">
+    <h1 class="w3-text-theme" id="desc" style="text-align: center;">Update Item</h1>
+    <div class="w3-section">
+        <label><b>Updated Title</b></label>
+        <input type="text" id="TTT" class="w3-border w3-input w3-margin-bottom" id="title" name="title" required>
+        <label><b>Updated Description</b></label>
+        <input type="text" id="DESC" class="w3-border w3-input w3-margin-bottom" id="description" name="description"
+            required>
+        <label><b>Updated Due date</b></label>
+        <input id="DDD" type="text" class="w3-border w3-input w3-margin-bottom" id="due_date" name="due_date"
+            required>
+        <button class="w3-button w3-block w3-theme w3-section w3-padding" type="submit">Update Task</button>
+    </div>
+</form>
+{% endblock content %}

@@ -1,12 +1,12 @@
 {% extends 'layout.html' %}
 {% block content %}
-    <div class="w3-margin"></div>
     {% for item in content %}
+        <h1 class="w3-text-theme" style="text-align: center;">Make sure to get these done!</h1>
         <div class="w3-card card w3-padding" id="{{item.id}}"> 
-            <h3 class="w3-text-theme">{{item.title}}</h3>
+            <h3 id="item-title" class="w3-text-theme">{{item.title}}</h3>
             <div class="w3-display-container">
-                <p class="w3-text-theme garb">{{item.content}}</p>
-                <p class="w3-text-theme">{{item.duedate}}</p>
+                <p id="item-content" class="w3-text-theme garb">{{item.content}}</p>
+                <p id="item-duedate" class="w3-text-theme">{{item.duedate}}</p>
                 <div class="trash-cont garb w3-padding w3-display-right">
                     <a href="{{url_for('del_id', id=item.id)}}">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
@@ -15,27 +15,33 @@
                             <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z" />
                         </svg>
                     </a>
+                    <a href="{{url_for('update', id=item.id)}}" class="w3-container w3-margin-right w3-display-right">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#009688" width="24px" height="24px">
+                            <path d="M0 0h24v24H0z" fill="none"/>
+                            <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/>
+                        </svg>
+                    </a>
                 </div>
             </div>
         </div>
     {% endfor %}
-    <button class="w3-button w3-xlarge w3-theme-d1 w3-display-bottomright w3-margin"
-        onclick="document.getElementById('id01').style.display='block'">+</button>
+    <button class="w3-button plus w3-xlarge w3-theme-d1 w3-display-bottomright w3-margin"
+        onclick="reg_modal()">+</button>
     <div id="id01" class="w3-modal">
         <div class="w3-modal-content w3-animate-zoom">
             <div class="w3-container">
                 <span onclick="document.getElementById('id01').style.display='none'"
                     class="w3-button w3-display-topright">&times;</span>
-                <h1 class="w3-text-theme" style="text-align: center;">New Item</h1>
-                <form autocomplete="off" action="{{url_for('todo')}}" method="POST" class="w3-container w3-text-theme">
+                <h1 class="w3-text-theme" id="desc" style="text-align: center;">New Item</h1>
+                <form autocomplete="off" id="form" action="{{url_for('todo')}}" method="POST" class="w3-container w3-text-theme">
                     <div class="w3-section">
                         <label><b>Title</b></label>
-                        <input type="text" class="w3-border w3-input w3-margin-bottom" name="title" required>
+                        <input type="text" id="TTT" class="w3-border w3-input w3-margin-bottom" id="title" name="title" required>
                         <label><b>Description</b></label>
-                        <input type="text" class="w3-border w3-input w3-margin-bottom" id="description" name="description"
+                        <input type="text" id="DESC" class="w3-border w3-input w3-margin-bottom" id="description" name="description"
                             required>
                         <label><b>Due date</b></label>
-                        <input type="text" class="w3-border w3-input w3-margin-bottom" id="due_date" name="due_date"
+                        <input id="DDD" type="text" class="w3-border w3-input w3-margin-bottom" id="due_date" name="due_date"
                             required>
                         <button class="w3-button w3-block w3-theme w3-section w3-padding" type="submit">Add Task</button>
                     </div>
@@ -43,4 +49,17 @@
             </div>
         </div>
     </div>
+    <script defer>
+        function show_modal(){
+            document.getElementById('id01').style.display='block';
+        }
+        function reg_modal(){
+            show_modal();
+            document.getElementById('desc').innerText = "New Item";
+            document.getElementById('DDD').placeholder = "Due Date";
+            document.getElementById('TTT').placeholder = "Title";
+            document.getElementById('DESC').placeholder = "Description";
+            document.getElementById('form').action = "{{url_for('todo')}}";   
+        }
+    </script>
 {% endblock content %}
