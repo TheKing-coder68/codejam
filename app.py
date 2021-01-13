@@ -1,6 +1,9 @@
-from flask import Flask, url_for, render_template, redirect, request
+from flask import Flask, url_for, render_template, redirect, request, session
+from flask.wrappers import Request
 from flask_sqlalchemy import SQLAlchemy
 from datetime import date
+
+from jinja2.utils import select_autoescape
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '5791628bb0b13ce0c676dfde280ba245'
@@ -30,6 +33,12 @@ class Event(db.Model):
     notes = db.Column(db.String(100), nullable=False)
     def __repr__(self):
         return f"{self.event_type} {self.date} {self.notes}"
+@app.errorhandler(404)
+def error(e):
+    return render_template('error.html'), 404
+@app.errorhandler(405)
+def error405(e):
+    return render_template('error405.html'), 405
 @app.route("/")
 def home():
     data = TodoItem.query.all()
@@ -64,7 +73,7 @@ def dat():
     if request.method == 'GET':
         events = Event.query.all()
         events = events[::-1]
-        return render_template('dat.html', header="Important Dates and Times", dates=events)
+        return render_template('dat.html', header="Important Dates and Times", title="Important dates", dates=events)
     else:
         e_type = request.form.get('type')
         date = request.form.get('date')
@@ -73,6 +82,48 @@ def dat():
         db.session.add(event)
         db.session.commit()
         return redirect(url_for('dat', methods=['GET']))
+@app.route("/update/<id>")
+def update(id):
+    session['id'] = id
+    todo = TodoItem.query.get(id)
+    TTT = todo.title
+    DESC = todo.content
+    DDATE = todo.duedate
+    return render_template('update.html', TTT=TTT, DESC=DESC, DDATE=DDATE)
+@app.route("/update-dat/<id>")
+def update_dat(id):
+    session['id'] = id
+    event = Event.query.get(id)
+    etype = event.event_type
+    desc = event.notes
+    date = event.date
+    return render_template('update_dat.html', type=etype, desc=desc, date=date)
+@app.route("/save-updated", methods=['POST'])
+def save_updated():
+    id = session['id']
+    item_to_be_updated = TodoItem.query.get(id)
+    title = request.form.get('title')
+    content = request.form.get('description')
+    ddate = request.form.get('due_date')
+    item_to_be_updated.title = title
+    item_to_be_updated.content = content
+    item_to_be_updated.duedate = ddate
+    db.session.commit()
+    session.pop('id', None)
+    return redirect(url_for('todo'))
+@app.route("/save-updated-dat", methods=['POST'])
+def save_updated_dat():
+    id = session['id']
+    item_to_be_updated = Event.query.get(id)
+    event_type = request.form.get('title')
+    date = request.form.get('description')
+    notes = request.form.get('due_date')
+    item_to_be_updated.event_type = event_type
+    item_to_be_updated.date = date
+    item_to_be_updated.notes = notes
+    db.session.commit()
+    session.pop('id', None)
+    return redirect(url_for('dat'))
 @app.route("/del/event/<id>")
 def del_event(id):
     id = Event.query.get(id)
