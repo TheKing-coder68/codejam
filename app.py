@@ -1,9 +1,6 @@
 from flask import Flask, url_for, render_template, redirect, request, session
-from flask.wrappers import Request
 from flask_sqlalchemy import SQLAlchemy
 from datetime import date
-
-from jinja2.utils import select_autoescape
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '5791628bb0b13ce0c676dfde280ba245'
