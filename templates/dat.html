@@ -1,7 +1,7 @@
 {% extends 'layout.html' %}
 {% block content %}
-    <h1 class="w3-text-theme">Your important dates are</h1>
-    <div class="schedule w3-container w3-theme-dark w3-half">
+    <h1 class="w3-text-theme w3-center">Your important dates are</h1>
+    <div class="schedule dat w3-container w3-theme-dark">
         <h3 style="text-align: center">Dates and Times</h3>
         <div class="w3-content">
             <table class="w3-table-all w3-section">
@@ -13,8 +13,8 @@
                     {% for event in dates %}
                         <tr class="w3-theme">
                             <td>{{event.event_type}}</td>
-                            <td>{{event.date}}</td>
-                            <td class="w3-display-container">{{event.notes}} 
+                            <td>{{event.notes}}</td>
+                            <td class="w3-display-container">{{event.date}} 
                                 <a class="w3-display-right" href="{{url_for('del_event', id=event.id)}}">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                                         fill="#004a43" width="24px" height="24px" class="trash">
@@ -45,15 +45,19 @@
                 <form autocomplete="off" action="{{url_for('dat')}}" method="POST" class="w3-container w3-text-theme">
                     <div class="w3-section">
                         <label><b>Event Type</b></label>
-                        <input type="text" class="w3-border w3-input w3-margin-bottom" name="type" placeholder="Birthday, Meeting..." required>
+                        <input type="text" class="w3-border w3-input w3-margin-bottom" name="type" placeholder="Birthday, Meeting..." maxlength="30" required>
                         <label><b>Date</b></label>
-                        <input type="text" class="w3-border w3-input w3-margin-bottom" id="date" name="date" placeholder="January 1st 2021" required>
+                        <input type="text" class="w3-border w3-input w3-margin-bottom" id="date" name="date" placeholder="January 1st 2021" maxlength="30"required>
                         <label><b>Event Notes</b></label>
-                        <input type="text" class="w3-border w3-input w3-margin-bottom" id="notes" name="notes" placeholder="Meeting with John" required>
+                        <input type="text" class="w3-border w3-input w3-margin-bottom" id="notes" name="notes" placeholder="Meeting with John" maxlength="30"required>
                         <button class="w3-button w3-block w3-theme w3-section w3-padding" type="submit">Add Event</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+    <script>
+        var ele = document.getElementById("nav3");
+        ele.classList.toggle("und");
+    </script>
 {% endblock content %}

@@ -5,12 +5,12 @@
     <h1 class="w3-text-theme" id="desc" style="text-align: center;">Update Item</h1>
     <div class="w3-section">
         <label><b>Updated Title</b></label>
-        <input type="text" id="TTT" class="w3-border w3-input w3-margin-bottom" id="title" name="title" required>
+        <input type="text" id="TTT" class="w3-border w3-input w3-margin-bottom" id="title" name="title" maxlength="30" value="{{TTT}}" required>
         <label><b>Updated Description</b></label>
-        <input type="text" id="DESC" class="w3-border w3-input w3-margin-bottom" id="description" name="description"
+        <input type="text" id="DESC" class="w3-border w3-input w3-margin-bottom" id="description" name="description" maxlength="30" value="{{DESC}}"
             required>
         <label><b>Updated Due date</b></label>
-        <input id="DDD" type="text" class="w3-border w3-input w3-margin-bottom" id="due_date" name="due_date"
+        <input id="DDD" type="text" class="w3-border w3-input w3-margin-bottom" id="due_date" name="due_date" maxlength="30" value="{{DDATE}}"
             required>
         <button class="w3-button w3-block w3-theme w3-section w3-padding" type="submit">Update Task</button>
     </div>

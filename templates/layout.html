@@ -14,9 +14,9 @@
 </head>
 <body>
     <div class="w3-bar w3-theme-dark">
-        <h4><a class="w3-bar-item w3-margin-bottom" href="{{ url_for('home') }}">Home</a></h4>
-        <h4><a class="w3-bar-item w3-margin-bottom" href="{{ url_for('todo') }}">Todo</a></h4>
-        <h4><a class="w3-bar-item w3-margin-bottom" href="{{ url_for('dat') }}">Important Dates</a></h4>
+        <h4><a class="w3-bar-item w3-margin-bottom" id="nav1" href="{{ url_for('home') }}">Home</a></h4>
+        <h4><a class="w3-bar-item w3-margin-bottom" id="nav2" href="{{ url_for('todo') }}">Todo</a></h4>
+        <h4><a class="w3-bar-item w3-margin-bottom" id="nav3" href="{{ url_for('dat') }}">Important Dates</a></h4>
     </div>
     <div class="w3-container">
         {% block content %}

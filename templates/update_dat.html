@@ -5,13 +5,11 @@
     <h1 class="w3-text-theme" id="desc" style="text-align: center;">Update Event</h1>
     <div class="w3-section">
         <label><b>Updated Title</b></label>
-        <input type="text" id="TTT" class="w3-border w3-input w3-margin-bottom" id="title" name="title" required>
+        <input type="text" id="TTT" class="w3-border w3-input w3-margin-bottom" id="title" name="title" value="{{type}}" required>
         <label><b>Updated Description</b></label>
-        <input type="text" id="DESC" class="w3-border w3-input w3-margin-bottom" id="description" name="description"
-            required>
-        <label><b>Updated Due date</b></label>
-        <input id="DDD" type="text" class="w3-border w3-input w3-margin-bottom" id="due_date" name="due_date"
-            required>
+        <input type="text" id="DESC" class="w3-border w3-input w3-margin-bottom" id="description" name="description" value="{{desc}}" required>
+        <label><b>Updated Date</b></label>
+        <input id="DDD" type="text" class="w3-border w3-input w3-margin-bottom" id="due_date" name="due_date" value="{{date}}" required>
         <button class="w3-button w3-block w3-theme w3-section w3-padding" type="submit">Update Event</button>
     </div>
 </form>
